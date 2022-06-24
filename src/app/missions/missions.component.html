@@ -1,0 +1,9 @@
+<h2>{{ mission.name }} 任務細節</h2>
+<div>
+  <span>任務 ID: </span>
+  {{ mission.id }}
+</div>
+<div>
+  <label>任務名稱: </label>
+  <input id="name" [(ngModel)]="mission.name" placeholder="name"/>
+</div>
