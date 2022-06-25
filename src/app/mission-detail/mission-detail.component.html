@@ -1,1 +1,14 @@
-<p>mission-detail works!</p>
+<body class="missions">
+  <div *ngIf="selectedMission">
+    <h2>{{ selectedMission.name }} 任務細節</h2>
+    <div>ID: {{ selectedMission.id }}</div>
+    <div>
+      <label for="hero-name">任務名稱: </label>
+      <input
+        id="hero-name"
+        [(ngModel)]="selectedMission.name"
+        placeholder="name"
+      />
+    </div>
+  </div>
+</body>

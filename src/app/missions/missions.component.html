@@ -5,7 +5,7 @@
       <button
         type="button"
         (click)="onSelect(mission)"
-        [class.selected]="mission === selectMision"
+        [class.selected]="mission === selectedMission"
       >
         <span class="badge"> {{ mission.id }} </span>
         <span class="name"> {{ mission.name }} </span>
@@ -13,16 +13,5 @@
     </li>
   </ul>
 
-  <div *ngIf="selectMision">
-    <h2>{{ selectMision.name }} 任務細節</h2>
-    <div>ID: {{ selectMision.id }}</div>
-    <div>
-      <label for="hero-name">任務名稱: </label>
-      <input
-        id="hero-name"
-        [(ngModel)]="selectMision.name"
-        placeholder="name"
-      />
-    </div>
-  </div>
+  <app-mission-detail [selectedMission]="selectedMission"> </app-mission-detail>
 </body>

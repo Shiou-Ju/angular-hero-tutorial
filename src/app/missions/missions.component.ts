@@ -11,10 +11,12 @@ export class MissionsComponent implements OnInit {
   constructor() {}
 
   missions = Missions;
-  selectMision?: Mission;
+  selectedMission?: Mission;
   onSelect(mission: Mission): void {
-    this.selectMision = mission;
+    this.selectedMission = mission;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    null;
+  }
 }

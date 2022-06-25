@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Mission } from '../mission';
 
 @Component({
   selector: 'app-mission-detail',
@@ -8,5 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class MissionDetailComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  @Input() selectedMission?: Mission;
+
+  ngOnInit(): void {
+    null;
+  }
 }
