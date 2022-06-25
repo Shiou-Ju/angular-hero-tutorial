@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Mission } from '../mission';
+import { Missions } from '../mockMissions';
 
 @Component({
   selector: 'app-missions',
@@ -9,10 +10,7 @@ import { Mission } from '../mission';
 export class MissionsComponent implements OnInit {
   constructor() {}
 
-  mission: Mission = {
-    id: 1,
-    name: '伏地挺身',
-  };
+  missions: Mission[] = Missions;
 
   ngOnInit(): void {}
 }
