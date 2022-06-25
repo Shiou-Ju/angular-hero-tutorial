@@ -35,8 +35,7 @@
       "files": ["*.html"],
       "extends": [
         "eslint:recommended",
-        "plugin:@angular-eslint/template/recommended",
-        "prettier"
+        "plugin:@angular-eslint/template/recommended"
       ],
       "rules": {}
     }
