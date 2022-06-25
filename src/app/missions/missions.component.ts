@@ -10,7 +10,11 @@ import { Missions } from '../mockMissions';
 export class MissionsComponent implements OnInit {
   constructor() {}
 
-  missions: Mission[] = Missions;
+  missions = Missions;
+  selectMision?: Mission;
+  onSelect(mission: Mission): void {
+    this.selectMision = mission;
+  }
 
   ngOnInit(): void {}
 }
