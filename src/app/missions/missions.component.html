@@ -1,3 +1,4 @@
+<body *ngIf="show">
   <h2>任務清單</h2>
 
   <ul *ngIf="show" class="missions">
@@ -14,3 +15,4 @@
   </ul>
 
   <app-mission-detail [selectedMission]="selectedMission"> </app-mission-detail>
+</body>

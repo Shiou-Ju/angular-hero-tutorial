@@ -21,26 +21,11 @@ export class MissionService {
   constructor(private http: HttpClient) {}
 
   /** get missions from server */
-  // 1. async way
-  // async getMissions(): Promise<Mission[]> {
-  //   const res = await fetch(this.apiUrl);
-  //   const content = (await res.json()) as GetMissionsResponse;
-  //   return content.data;
-  // }
-
-  // 2. observable way
   getMissions(): Observable<Mission[]> {
-    // const url = '';
-    // const options = {
-    //   reportProgress: true,
-    // };
-
-    // const req = new HttpRequest('GET', url, options);
-
-    return this.http
+    const res = this.http
       .get<GetMissionsResponse>(this.apiUrl)
       .pipe(map((res: GetMissionsResponse) => res.data));
-    // .pipe(catchError(this.handleError<GetMissionsResponse>('getMissions')));
+    return res;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
