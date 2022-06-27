@@ -5,9 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { MissionsComponent } from './missions/missions.component';
 import { MissionDetailComponent } from './mission-detail/mission-detail.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
-  declarations: [AppComponent, MissionsComponent, MissionDetailComponent],
+  declarations: [AppComponent, MissionsComponent, MissionDetailComponent, MessagesComponent],
   imports: [HttpClientModule, BrowserModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
