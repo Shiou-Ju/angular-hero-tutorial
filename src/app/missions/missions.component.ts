@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MessageService } from '../message.service';
 import { Mission } from '../mission';
 import { MissionService } from '../mission.service';
 
@@ -9,8 +10,10 @@ import { MissionService } from '../mission.service';
 })
 export class MissionsComponent implements OnInit {
   show = false;
+
   constructor(
     private missionService: MissionService,
+    private messageService: MessageService,
     private cdf: ChangeDetectorRef
   ) {}
 
@@ -31,5 +34,6 @@ export class MissionsComponent implements OnInit {
 
   onSelect(mission: Mission): void {
     this.selectedMission = mission;
+    this.messageService.add(`選擇任務 ${mission.name}`);
   }
 }
