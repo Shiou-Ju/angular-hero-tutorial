@@ -1,13 +1,45 @@
 <body class="missions">
   <div *ngIf="selectedMission">
-    <h2>{{ selectedMission.name }} 任務細節</h2>
-    <div>ID: {{ selectedMission.id }}</div>
+    <h2>「{{ selectedMission.name }}」任務細節</h2>
+    <div>編號： {{ selectedMission.id }}</div>
     <div>
-      <label for="hero-name">任務名稱: </label>
+      <label for="mission-name">名稱： </label>
       <input
-        id="hero-name"
+        id="mission-name"
         [(ngModel)]="selectedMission.name"
-        placeholder="name"
+        placeholder="名稱"
+      />
+    </div>
+    <div>
+      <label for="mission">數量： </label>
+      <input
+        id="mission-number"
+        [(ngModel)]="selectedMission.number"
+        placeholder="數量"
+      />
+    </div>
+    <div>
+      <label for="mission">單位： </label>
+      <input
+        id="mission-unit"
+        [(ngModel)]="selectedMission.unit"
+        placeholder="組"
+      />
+    </div>
+    <div>
+      <label for="mission-is-fixed">是否定量： </label>
+      <input
+        id="mission-is-fixed"
+        [(ngModel)]="isFixedString"
+        placeholder="非定量"
+      />
+    </div>
+    <div *ngIf="selectedMission.increment">
+      <label for="mission-increment">定期增量： </label>
+      <input
+        id="mission-increment"
+        [(ngModel)]="selectedMission.increment"
+        placeholder="增量"
       />
     </div>
   </div>

@@ -11,6 +11,8 @@ export class MissionDetailComponent implements OnInit {
 
   @Input() selectedMission?: Mission;
 
+  isFixedString = this.selectedMission?.isFixed ? '是' : '否';
+
   ngOnInit(): void {
     null;
   }

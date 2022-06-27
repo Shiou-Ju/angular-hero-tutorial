@@ -5,9 +5,11 @@ export interface Mission {
   name: string;
   /** 單位，例如「組」 */
   unit: string;
+  /** 數量 */
+  number: number;
   /** 是否為每日定量 */
   isFixed: boolean;
-  /** 是否為定期增量 */
+  /** 每日增量額度 */
   increment?: number;
 }
 
