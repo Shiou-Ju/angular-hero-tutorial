@@ -8,7 +8,12 @@ import { MissionDetailComponent } from './mission-detail/mission-detail.componen
 import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
-  declarations: [AppComponent, MissionsComponent, MissionDetailComponent, MessagesComponent],
+  declarations: [
+    AppComponent,
+    MissionsComponent,
+    MissionDetailComponent,
+    MessagesComponent,
+  ],
   imports: [HttpClientModule, BrowserModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

@@ -4,9 +4,7 @@
     class="single-message"
     *ngFor="let message of messages; let currentIndex = index"
   >
-   {{currentIndex+1}} {{ message }}
+    {{ currentIndex + 1 }} {{ message }}
   </div>
-  <button type="button" class="clear" (click)="clearMessage()">
-    清除訊息
-  </button>
+  <button type="button" class="clear" (click)="clearMessage()">清除訊息</button>
 </div>

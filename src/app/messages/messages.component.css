@@ -1,13 +1,13 @@
 /* MessagesComponent's private CSS styles */
-.container { 
- margin-left: 1em;
+.container {
+  margin-left: 1em;
 }
 
 h2 {
-  color: #A80000;
+  color: #a80000;
 }
 
-.single-message { 
+.single-message {
   border: #333;
   border-style: solid;
   width: 15em;
@@ -25,5 +25,5 @@ h2 {
 
 .clear:hover {
   color: white;
-  background-color: #42545C;
+  background-color: #42545c;
 }
