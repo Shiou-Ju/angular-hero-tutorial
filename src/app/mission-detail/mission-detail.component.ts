@@ -14,7 +14,8 @@ import { MissionService } from '../mission.service';
 export class MissionDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private missionService: MissionService // TODO: // private location: Location
+    private missionService: MissionService,
+    private location: Location
   ) {}
 
   @Input() selectedMission?: Mission;
@@ -30,5 +31,9 @@ export class MissionDetailComponent implements OnInit {
     this.missionService
       .getMission(id)
       .subscribe((mission) => (this.selectedMission = mission));
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
