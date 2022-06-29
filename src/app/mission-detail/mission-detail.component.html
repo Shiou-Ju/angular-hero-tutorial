@@ -1,8 +1,10 @@
 <body class="missions">
   <div *ngIf="selectedMission">
     <h2>「{{ selectedMission.name }}」任務細節</h2>
-    <div>編號： {{ selectedMission.id }}</div>
-    <div>
+    <div class="id-display">
+      <p>編號： {{ selectedMission.id }}</p>
+    </div>
+    <div class="field-display">
       <label for="mission-name">名稱： </label>
       <input
         id="mission-name"
@@ -10,7 +12,7 @@
         placeholder="名稱"
       />
     </div>
-    <div>
+    <div class="field-display">
       <label for="mission">數量： </label>
       <input
         id="mission-number"
@@ -18,7 +20,7 @@
         placeholder="數量"
       />
     </div>
-    <div>
+    <div class="field-display">
       <label for="mission">單位： </label>
       <input
         id="mission-unit"
@@ -26,16 +28,16 @@
         placeholder="組"
       />
     </div>
-    <div>
-      <label for="mission-is-fixed">是否定量： </label>
+    <div class="field-display">
+      <label for="mission-is-fixed">定量： </label>
       <input
         id="mission-is-fixed"
         [(ngModel)]="isFixedString"
         placeholder="非定量"
       />
     </div>
-    <div *ngIf="selectedMission.increment">
-      <label for="mission-increment">定期增量： </label>
+    <div class="field-display" *ngIf="selectedMission.increment">
+      <label for="mission-increment">增量： </label>
       <input
         id="mission-increment"
         [(ngModel)]="selectedMission.increment"

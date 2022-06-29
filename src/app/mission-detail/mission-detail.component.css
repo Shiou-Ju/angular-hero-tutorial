@@ -1,0 +1,49 @@
+label {
+  color: #435960;
+  font-weight: bold;
+}
+input {
+  font-size: 1em;
+  padding: 0.5rem;
+}
+button {
+  margin-top: 20px;
+  background-color: #eee;
+  padding: 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+button:hover {
+  background-color: #cfd8dc;
+}
+button:disabled {
+  background-color: #eee;
+  color: #ccc;
+  cursor: auto;
+}
+
+/* .id-display */
+.id-display {
+  background-color: #eee;
+  width: 15rem;
+}
+
+.id-display p {
+  padding: 0.5rem;
+}
+
+/* .field-display */
+/* TODO: make flex */
+.field-display {
+  margin-bottom: 0.5rem;
+  width: 15rem;
+}
+
+.field-display label {
+  width: 5rem;
+  margin-right: 1rem;
+}
+
+.field-display input {
+  width: 7rem;
+}
