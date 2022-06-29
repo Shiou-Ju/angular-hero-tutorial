@@ -2,16 +2,16 @@
   "name": "daily-missions-angular",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
     "dev": "ng serve",
-    "build": "ng build",
+    "start": "yarn format && ng serve",
+    "build": "yarn format && build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint",
-    "prettier": "npx prettier src --check",
-    "prettier:fix": "yarn prettier -- --write",
-    "format": "yarn prettier:fix && ng lint --fix"
+    "format": "yarn format:prettier:fix && ng lint --fix",
+    "format:lint": "ng lint",
+    "format:prettier": "npx prettier src --check",
+    "format:prettier:fix": "yarn format:prettier -- --write",
+    "ng": "ng",
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
