@@ -2,29 +2,41 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule, Routes } from '@angular/router';
 import { MissionsComponent } from './missions/missions.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MissionDetailComponent } from './mission-detail/mission-detail.component';
 
 // route paths
 const paths = {
-  missionRoute: 'missions',
-  dashBoardRoute: 'dashboard',
+  missionDetail: 'detail/:id',
+  missions: 'missions',
+  dashBoard: 'dashboard',
 };
 
-// declaration route
+// default route
 const defaultRoute: Route = {
   path: '',
-  redirectTo: paths.dashBoardRoute,
+  redirectTo: paths.dashBoard,
   pathMatch: 'full',
 };
-const missionRoute: Route = {
-  path: paths.missionRoute,
+// declaration route
+const missionDetailRoute: Route = {
+  path: paths.missionDetail,
+  component: MissionDetailComponent,
+};
+const missionsRoute: Route = {
+  path: paths.missions,
   component: MissionsComponent,
 };
 const dashBoardRoute: Route = {
-  path: paths.dashBoardRoute,
+  path: paths.dashBoard,
   component: DashboardComponent,
 };
 
-const routes: Routes = [defaultRoute, missionRoute, dashBoardRoute];
+const routes: Routes = [
+  defaultRoute,
+  missionDetailRoute,
+  missionsRoute,
+  dashBoardRoute,
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

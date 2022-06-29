@@ -1,6 +1,6 @@
 <h2>今日任務</h2>
 <div class="missions-menu">
-  <a *ngFor="let mission of missions">
+  <a *ngFor="let mission of missions" routerLink="/detail/{{ mission.id }}">
     {{ mission.name }}
   </a>
 </div>

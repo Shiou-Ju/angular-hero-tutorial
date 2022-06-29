@@ -26,13 +26,37 @@ export class MissionService {
 
   /** get missions from server */
   getMissions(): Observable<Mission[]> {
-    const res = this.http
+    const missions = this.http
       .get<GetMissionsResponse>(this.apiUrl)
       .pipe(map((res: GetMissionsResponse) => res.data));
 
     this.messageService.add('任務載入完成');
 
-    return res;
+    return missions;
+  }
+
+  getMission(id: number): Observable<Mission> {
+    const mission = this.http.get<GetMissionsResponse>(this.apiUrl).pipe(
+      map((res: GetMissionsResponse) => {
+        const missions = res.data;
+
+        const filteredMissions = missions.filter(
+          (mission) => mission.id === id
+        );
+
+        // TODO: see if this can handle error
+        if (filteredMissions.length > 1) {
+          throwError;
+        }
+        const [mission] = filteredMissions;
+
+        return mission;
+      })
+    );
+
+    this.messageService.add(`取得單一任務${id}`);
+
+    return mission;
   }
 
   // TODO: error handling

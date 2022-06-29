@@ -22,7 +22,6 @@ export class MissionsComponent implements OnInit {
   }
 
   missions: Mission[] = [];
-  selectedMission?: Mission;
 
   getMissions(): void {
     this.missionService.getMissions().subscribe((missions) => {
@@ -30,10 +29,6 @@ export class MissionsComponent implements OnInit {
       this.show = true;
       this.cdf.detectChanges();
     });
-  }
-
-  onSelect(mission: Mission): void {
-    this.selectedMission = mission;
-    this.messageService.add(`選擇任務 ${mission.name}`);
+    this.messageService.add(`任務列表載入`);
   }
 }

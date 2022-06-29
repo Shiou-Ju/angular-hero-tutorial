@@ -3,16 +3,10 @@
 
   <ul *ngIf="show" class="missions">
     <li *ngFor="let mission of missions">
-      <button
-        type="button"
-        (click)="onSelect(mission)"
-        [class.selected]="mission === selectedMission"
-      >
+      <a routerLink="/detail/{{ mission.id }}">
         <span class="badge"> {{ mission.id }} </span>
         <span class="name"> {{ mission.name }} </span>
-      </button>
+      </a>
     </li>
   </ul>
-
-  <app-mission-detail [selectedMission]="selectedMission"> </app-mission-detail>
 </body>
