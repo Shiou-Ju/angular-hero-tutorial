@@ -29,6 +29,6 @@ export class MissionsComponent implements OnInit {
       this.show = true;
       this.cdf.detectChanges();
     });
-    this.messageService.add(`任務列表載入`);
+    this.messageService.add(`missions components: 任務列表載入`);
   }
 }
