@@ -9,12 +9,12 @@ import { MessageService } from '../message.service';
 export class MessagesComponent implements OnInit {
   constructor(public messageService: MessageService) {}
 
-  show = false;
+  // show = false;
   messages: string[] = this.messageService.messages;
 
   ngOnInit(): void {
     const isEmptyMessage = this.messageService.messages.length > 0;
-    this.show = isEmptyMessage ? true : false;
+    // this.show = isEmptyMessage ? true : false;
   }
 
   clearMessage() {
