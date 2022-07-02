@@ -12,11 +12,16 @@ type GetMissionsResponse = {
   data: Mission[];
 };
 
+type GetMissionResponse = {
+  success: boolean;
+  data: Mission;
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class MissionService {
-  private apiUrl = 'http://localhost:3552/missions';
+  private missionsApiUrl = 'http://localhost:3552/missions';
 
   constructor(
     private http: HttpClient,
@@ -26,7 +31,7 @@ export class MissionService {
   /** get missions from server */
   getMissions(): Observable<Mission[]> {
     const missions = this.http
-      .get<GetMissionsResponse>(this.apiUrl)
+      .get<GetMissionsResponse>(this.missionsApiUrl)
       .pipe(map((res: GetMissionsResponse) => res.data))
       .pipe(
         tap((_) => this.log('取得任務列表')),
@@ -40,22 +45,19 @@ export class MissionService {
   // TODO: implement backend to serve single mission accordingly
 
   getMission(id: number): Observable<Mission> {
+    const missionUrl = `${this.missionsApiUrl}/${id}`;
     const mission = this.http
-      .get<GetMissionsResponse>(this.apiUrl)
+      .get<GetMissionResponse>(missionUrl)
       .pipe(
-        map((res: GetMissionsResponse) => {
-          const missions = res.data;
-
-          // FIXME:
-          const filteredMissions = missions.filter(
-            (mission) => mission.id === id
-          );
-          const [mission] = filteredMissions;
-
+        map((res: GetMissionResponse) => {
           // TODO: handle error better after implementing backend api
-          if (!mission) {
-            throw new Error('id not found');
+          if (!res.success) {
+            const errorMessage = JSON.stringify(res.data);
+            if (errorMessage.includes('404')) throw new Error('id not found');
+            throw new Error(`${res.data}`);
           }
+
+          const mission = res.data;
 
           return mission;
         })
