@@ -6,7 +6,7 @@ export interface Mission {
   /** 單位，例如「組」 */
   unit: string;
   /** 數量 */
-  number: number;
+  amount: number;
   /** 是否為每日定量 */
   isFixed: boolean;
   /** 每日增量額度 */
