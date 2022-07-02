@@ -1,8 +1,8 @@
 // angular modules
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError, map } from 'rxjs';
-import { catchError, tap, retry } from 'rxjs/operators';
+import { Observable, of, map } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 // local modules
 import { Mission } from 'src/interfaces/Mission';
 import { MessageService } from 'src/app/message.service';
@@ -15,6 +15,19 @@ type GetMissionsResponse = {
 type GetMissionResponse = {
   success: boolean;
   data: Mission;
+};
+
+type PutMissionResponse = GetMissionResponse;
+
+// TODO: 是否有需要
+export type displayedMission = {
+  id: number;
+  name: string;
+  unit: string;
+  amount: number;
+  /** 前端顯示為「是」「否」 */
+  isFixedString: '是' | '否';
+  increment?: number;
 };
 
 @Injectable({
@@ -68,6 +81,50 @@ export class MissionService {
       );
 
     return mission;
+  }
+
+  /** update mission */
+  updateMission(newMission: Mission): Observable<Mission> {
+    // TODO: duplicate with above
+    const id = newMission.id;
+    const missionUrl = `${this.missionsApiUrl}/${id}`;
+    const postOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+
+    // convert fields
+    // TODO: value must be string, not boolean, otherwise backend might crash
+    const update = {
+      ...newMission,
+      // TODO: 有無更好做法
+      isFixed: `${newMission.isfixed}` === 'true' ? 'true' : 'false',
+    };
+
+    // TODO: 若定量為 false，則將增量改為 0
+    // TODO: 不顯示
+
+    const updated = this.http
+      .put<PutMissionResponse>(missionUrl, update, postOptions)
+      .pipe(
+        map((res: PutMissionResponse) => {
+          // TODO: handle error better after implementing backend api
+          if (!res.success) {
+            const errorMessage = JSON.stringify(res.data);
+            if (errorMessage.includes('404')) throw new Error(`id not found`);
+            throw new Error(errorMessage);
+          }
+
+          const mission = res.data;
+
+          return mission;
+        })
+      )
+      .pipe(
+        tap((_) => this.log(`更新單一任務 id=${id}`)),
+        catchError(this.handleError<Mission>(`updateMission id=${id}`))
+      );
+
+    return updated;
   }
 
   /** message service method */
