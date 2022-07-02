@@ -3,8 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 // local modules
-import { Mission } from '../mission';
-import { MissionService } from '../mission.service';
+import { Mission } from 'src/interfaces/Mission';
+import { MissionService } from 'src/app/mission.service';
 
 @Component({
   selector: 'app-mission-detail',

@@ -1,7 +1,9 @@
+// node modules
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { MessageService } from '../message.service';
-import { Mission } from '../mission';
-import { MissionService } from '../mission.service';
+// local modules
+import { Mission } from 'src/interfaces/Mission';
+import { MessageService } from 'src/app/message.service';
+import { MissionService } from 'src/app/mission.service';
 
 @Component({
   selector: 'app-missions',

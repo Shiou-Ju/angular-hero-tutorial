@@ -1,12 +1,11 @@
 // angular modules
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// RxJS observable
 import { Observable, of, throwError, map } from 'rxjs';
 import { catchError, tap, retry } from 'rxjs/operators';
 // local modules
-import { Mission } from './mission';
-import { MessageService } from './message.service';
+import { Mission } from 'src/interfaces/Mission';
+import { MessageService } from 'src/app/message.service';
 
 type GetMissionsResponse = {
   success: boolean;

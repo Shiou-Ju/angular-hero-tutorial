@@ -1,6 +1,8 @@
+// angular modules
 import { Component, OnInit } from '@angular/core';
-import { Mission } from '../mission';
-import { MissionService } from '../mission.service';
+// local modules
+import { Mission } from 'src/interfaces/Mission';
+import { MissionService } from 'src/app/mission.service';
 
 @Component({
   selector: 'app-dashboard',
