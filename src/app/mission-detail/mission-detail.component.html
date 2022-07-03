@@ -30,14 +30,13 @@
     </div>
     <div class="field-display">
       <label for="mission-is-fixed">定量： </label>
-      <!-- TODO: 要怎麼顯示 -->
       <input
         id="mission-is-fixed"
-        [(ngModel)]="selectedMission.isFixed"
-        placeholder="非定量"
+        [(ngModel)]="isFixedString"
+        placeholder="否"
       />
     </div>
-    <div class="field-display" *ngIf="selectedMission.increment">
+    <div class="field-display" *ngIf="!selectedMission.isFixed">
       <label for="mission-increment">增量： </label>
       <input
         id="mission-increment"

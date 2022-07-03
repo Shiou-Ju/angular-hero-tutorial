@@ -6,6 +6,9 @@ import { Location } from '@angular/common';
 import { Mission } from 'src/interfaces/Mission';
 import { MissionService } from 'src/app/mission.service';
 
+/** 前端顯示定量為「是」、「否」，非 boolean */
+type isFixedString = '是' | '否';
+
 @Component({
   selector: 'app-mission-detail',
   templateUrl: './mission-detail.component.html',
@@ -20,9 +23,8 @@ export class MissionDetailComponent implements OnInit {
 
   @Input() selectedMission?: Mission;
 
-  // isFixedString: displayedMission['isFixedString'] =
-  //   // TODO: 因為大小寫的關係，所以這邊的 value 不是單純 mission 的 value
-  //   this.selectedMission?.isfixed ? '是' : '否';
+  // 預設為否以顯示增量
+  isFixedString: isFixedString = '否';
 
   ngOnInit(): void {
     this.getMission();
@@ -30,9 +32,10 @@ export class MissionDetailComponent implements OnInit {
 
   getMission(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.missionService
-      .getMission(id)
-      .subscribe((mission) => (this.selectedMission = mission));
+    this.missionService.getMission(id).subscribe((mission) => {
+      this.selectedMission = mission;
+      this.isFixedString = mission.isFixed ? '是' : '否';
+    });
   }
 
   goBack(): void {
@@ -43,7 +46,7 @@ export class MissionDetailComponent implements OnInit {
     if (!!this.selectedMission) {
       const newMission: Mission = {
         ...this.selectedMission,
-        // isFixedString: this.isFixedString,
+        isFixed: this.isFixedString === '是' ? true : this.isFixedString === '否' ? false : false,
       };
       this.missionService
         .updateMission(newMission)

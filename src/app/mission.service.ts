@@ -32,7 +32,9 @@ export interface NewMissionFormData
   isFixed: string;
 }
 
-type RowId = string;
+interface UpdateMissionRequestBody extends Omit<Mission, 'isFixed'> {
+  isFixed: string;
+}
 
 type GetMissionsResponse = {
   success: boolean;
@@ -46,17 +48,6 @@ type GetMissionResponse = {
 
 type PutMissionResponse = GetMissionResponse;
 type CreateMissionReponse = GetMissionResponse;
-
-// TODO: 是否有需要
-export type displayedMission = {
-  id: number;
-  name: string;
-  unit: string;
-  amount: number;
-  /** 前端顯示為「是」「否」 */
-  isFixedString: '是' | '否';
-  increment?: number;
-};
 
 @Injectable({
   providedIn: 'root',
@@ -129,15 +120,10 @@ export class MissionService {
     };
 
     // convert fields for service
-    // TODO: value must be string, not boolean, otherwise backend might crash
-    const update = {
+    const update: UpdateMissionRequestBody = {
       ...newMission,
-      // TODO: 有無更好做法
       isFixed: `${newMission.isFixed}` === 'true' ? 'true' : 'false',
     };
-
-    // TODO: 若定量為 false，則將增量改為 0
-    // TODO: 不顯示
 
     const updated = this.http
       .put<PutMissionResponse>(missionUrl, update, postOptions)
@@ -170,9 +156,6 @@ export class MissionService {
     const postOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
-
-    // TODO: 若定量為 false，則將增量改為 0
-    // TODO: 不顯示
 
     const created = this.http
       .post<CreateMissionReponse>(this.missionsApiUrl, newMission, postOptions)

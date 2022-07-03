@@ -44,6 +44,7 @@ export class MissionsComponent implements OnInit {
     name = name.trim();
     amount = amount.trim();
     unit = unit.trim();
+    // TODO: convert to checkbox, and show increment if not checked
     isFixed = isFixed.trim();
     increment = increment.trim();
 
