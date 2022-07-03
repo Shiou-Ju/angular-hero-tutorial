@@ -8,9 +8,7 @@ export interface Mission {
   /** 數量 */
   amount: number;
   /** 是否為每日定量 */
-  // TODO: fix backend first
-  // isFixed: boolean;
-  isfixed: boolean;
+  isFixed: boolean;
   /** 每日增量額度 */
   increment?: number;
 }

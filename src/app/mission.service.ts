@@ -7,14 +7,34 @@ import { catchError, tap } from 'rxjs/operators';
 import { Mission } from 'src/interfaces/Mission';
 import { MessageService } from 'src/app/message.service';
 
+// db column names are in conventional cases
+export interface MissionFromDb {
+  /** 任務序號 */
+  id: string;
+  /** 例如：伏地挺身、練習英文 */
+  name: string;
+  /** 單位，例如「組」 */
+  unit: string;
+  /** 數量 */
+  amount: string;
+  /** 是否為每日定量 */
+  is_fixed: boolean;
+  /** 每日增量額度 */
+  increment?: string;
+  /** 建立時間 */
+  created_at: string;
+  /** 修改時間 */
+  updated_at: string;
+}
+
 type GetMissionsResponse = {
   success: boolean;
-  data: Mission[];
+  data: MissionFromDb[];
 };
 
 type GetMissionResponse = {
   success: boolean;
-  data: Mission;
+  data: MissionFromDb;
 };
 
 type PutMissionResponse = GetMissionResponse;
@@ -45,7 +65,15 @@ export class MissionService {
   getMissions(): Observable<Mission[]> {
     const missions = this.http
       .get<GetMissionsResponse>(this.missionsApiUrl)
-      .pipe(map((res: GetMissionsResponse) => res.data))
+      .pipe(
+        map((res: GetMissionsResponse) => {
+          const missionsFromDb = res.data;
+
+          const missions = missionsFromDb.map(this.convertRowToMission);
+
+          return missions;
+        })
+      )
       .pipe(
         tap((_) => this.log('取得任務列表')),
         catchError(this.handleError<Mission[]>('getMissions', []))
@@ -55,8 +83,6 @@ export class MissionService {
   }
 
   /** get single mission */
-  // TODO: implement backend to serve single mission accordingly
-
   getMission(id: number): Observable<Mission> {
     const missionUrl = `${this.missionsApiUrl}/${id}`;
     const mission = this.http
@@ -70,7 +96,9 @@ export class MissionService {
             throw new Error(`${res.data}`);
           }
 
-          const mission = res.data;
+          const missionFromDb = res.data;
+
+          const mission: Mission = this.convertRowToMission(missionFromDb);
 
           return mission;
         })
@@ -92,12 +120,12 @@ export class MissionService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
 
-    // convert fields
+    // convert fields for service
     // TODO: value must be string, not boolean, otherwise backend might crash
     const update = {
       ...newMission,
       // TODO: 有無更好做法
-      isFixed: `${newMission.isfixed}` === 'true' ? 'true' : 'false',
+      isFixed: `${newMission.isFixed}` === 'true' ? 'true' : 'false',
     };
 
     // TODO: 若定量為 false，則將增量改為 0
@@ -114,7 +142,9 @@ export class MissionService {
             throw new Error(errorMessage);
           }
 
-          const mission = res.data;
+          const missionFromDb = res.data;
+
+          const mission: Mission = this.convertRowToMission(missionFromDb);
 
           return mission;
         })
@@ -130,6 +160,22 @@ export class MissionService {
   /** message service method */
   private log(message: string) {
     this.messageService.add(`mission service : ${message}`);
+  }
+
+  /** convert row from db into mission complied to interface */
+  private convertRowToMission(missionFromDb: MissionFromDb): Mission {
+    const mission: Mission = {
+      id: parseInt(missionFromDb.id),
+      name: missionFromDb.name,
+      unit: missionFromDb.unit,
+      amount: parseInt(missionFromDb.amount),
+      isFixed: missionFromDb.is_fixed,
+      increment: missionFromDb.increment
+        ? parseInt(missionFromDb.increment)
+        : undefined,
+    };
+
+    return mission;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
