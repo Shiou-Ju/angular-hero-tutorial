@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 // local modules
 import { Mission } from 'src/interfaces/Mission';
 import { MessageService } from 'src/app/message.service';
-import { MissionService } from 'src/app/mission.service';
+import { MissionService, NewMissionFormData } from 'src/app/mission.service';
 
 @Component({
   selector: 'app-missions',
@@ -32,5 +32,44 @@ export class MissionsComponent implements OnInit {
       this.cdf.detectChanges();
     });
     this.messageService.add(`missions components: 任務列表載入`);
+  }
+
+  addMission(
+    name: string,
+    amount: string,
+    unit: string,
+    isFixed: string,
+    increment: string
+  ): void {
+    name = name.trim();
+    amount = amount.trim();
+    unit = unit.trim();
+    isFixed = isFixed.trim();
+    increment = increment.trim();
+
+    if (!name || !amount || !unit || !isFixed || !increment) {
+      return;
+    }
+
+    const newMission: NewMissionFormData = {
+      name,
+      amount,
+      unit,
+      isFixed,
+      increment,
+    };
+
+    this.missionService
+      .addMission(newMission)
+      .subscribe(async (mission) => this.missions.push(mission));
+
+    // TODO:
+    const message = JSON.stringify(newMission)
+      .split(',')
+      .join('\n\n')
+      .replace('{', '')
+      .replace('}', '');
+
+    this.messageService.add(`missions components: 建立新任務 ${message}`);
   }
 }

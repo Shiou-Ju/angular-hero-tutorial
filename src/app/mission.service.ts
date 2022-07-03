@@ -27,6 +27,13 @@ export interface MissionFromDb {
   updated_at: string;
 }
 
+export interface NewMissionFormData
+  extends Omit<MissionFromDb, 'id' | 'is_fixed' | 'created_at' | 'updated_at'> {
+  isFixed: string;
+}
+
+type RowId = string;
+
 type GetMissionsResponse = {
   success: boolean;
   data: MissionFromDb[];
@@ -38,6 +45,7 @@ type GetMissionResponse = {
 };
 
 type PutMissionResponse = GetMissionResponse;
+type CreateMissionReponse = GetMissionResponse;
 
 // TODO: 是否有需要
 export type displayedMission = {
@@ -155,6 +163,40 @@ export class MissionService {
       );
 
     return updated;
+  }
+
+  addMission(newMission: NewMissionFormData): Observable<Mission> {
+    // TODO: duplicate with above
+    const postOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+
+    // TODO: 若定量為 false，則將增量改為 0
+    // TODO: 不顯示
+
+    const created = this.http
+      .post<CreateMissionReponse>(this.missionsApiUrl, newMission, postOptions)
+      .pipe(
+        map((res: CreateMissionReponse) => {
+          // TODO: handle error better after implementing backend api
+          if (!res.success) {
+            const errorMessage = JSON.stringify(res.data);
+            throw new Error(errorMessage);
+          }
+
+          const createdMission = res.data;
+          const mission = this.convertRowToMission(createdMission);
+
+          return mission;
+        })
+      )
+      .pipe(
+        // TODO: how to add new id
+        tap((_) => this.log(`建立新任務`)),
+        catchError(this.handleError<Mission>(`createMission`))
+      );
+
+    return created;
   }
 
   /** message service method */
