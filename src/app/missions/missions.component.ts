@@ -75,9 +75,12 @@ export class MissionsComponent implements OnInit {
   }
 
   delete(targetMission: Mission): void {
-    this.missions = this.missions.filter(
-      (mission) => mission !== targetMission
-    );
-    this.missionService.deleteMission(targetMission.id).subscribe();
+    // TODO: make a modal to improve this
+    if (confirm(`確定要移除任務 ${targetMission.name} 嗎？`)) {
+      this.missions = this.missions.filter(
+        (mission) => mission !== targetMission
+      );
+      this.missionService.deleteMission(targetMission.id).subscribe();
+    }
   }
 }
