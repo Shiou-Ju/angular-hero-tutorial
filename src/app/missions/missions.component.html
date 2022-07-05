@@ -22,16 +22,18 @@
       type="button"
       class="add-button"
       (click)="
-        addMission(missionName.value,
-        missionAmount.value, 
-        missionUnit.value, 
-        missionIsFixed.value, 
-        missionIncrement.value);
+        addMission(
+          missionName.value,
+          missionAmount.value,
+          missionUnit.value,
+          missionIsFixed.value,
+          missionIncrement.value
+        );
         missionName.value = '';
         missionAmount.value = '';
         missionUnit.value = '';
         missionIsFixed.value = '';
-        missionIncrement.value = '';
+        missionIncrement.value = ''
       "
     >
       新增
@@ -44,6 +46,14 @@
         <span class="badge"> {{ mission.id }} </span>
         <span class="name"> {{ mission.name }} </span>
       </a>
+      <button
+        type="button"
+        class="delete"
+        title="delete mission"
+        (click)="delete(mission)"
+      >
+        X
+      </button>
     </li>
   </ul>
 </body>

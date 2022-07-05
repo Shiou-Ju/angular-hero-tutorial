@@ -46,7 +46,12 @@ export class MissionDetailComponent implements OnInit {
     if (!!this.selectedMission) {
       const newMission: Mission = {
         ...this.selectedMission,
-        isFixed: this.isFixedString === '是' ? true : this.isFixedString === '否' ? false : false,
+        isFixed:
+          this.isFixedString === '是'
+            ? true
+            : this.isFixedString === '否'
+            ? false
+            : false,
       };
       this.missionService
         .updateMission(newMission)

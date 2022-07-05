@@ -73,4 +73,11 @@ export class MissionsComponent implements OnInit {
 
     this.messageService.add(`missions components: 建立新任務 ${message}`);
   }
+
+  delete(targetMission: Mission): void {
+    this.missions = this.missions.filter(
+      (mission) => mission !== targetMission
+    );
+    this.missionService.deleteMission(targetMission.id).subscribe();
+  }
 }

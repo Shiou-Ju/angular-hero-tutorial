@@ -12,3 +12,4 @@ export interface Mission {
   /** 每日增量額度 */
   increment?: number;
 }
+// TODO: 需要一個 Day 的 interface 來記錄每日完成情形

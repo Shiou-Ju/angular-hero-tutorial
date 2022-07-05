@@ -115,7 +115,7 @@ export class MissionService {
     // TODO: duplicate with above
     const id = newMission.id;
     const missionUrl = `${this.missionsApiUrl}/${id}`;
-    const postOptions = {
+    const putOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
 
@@ -126,7 +126,7 @@ export class MissionService {
     };
 
     const updated = this.http
-      .put<PutMissionResponse>(missionUrl, update, postOptions)
+      .put<PutMissionResponse>(missionUrl, update, putOptions)
       .pipe(
         map((res: PutMissionResponse) => {
           // TODO: handle error better after implementing backend api
@@ -151,6 +151,7 @@ export class MissionService {
     return updated;
   }
 
+  /** create mission */
   addMission(newMission: NewMissionFormData): Observable<Mission> {
     // TODO: duplicate with above
     const postOptions = {
@@ -180,6 +181,20 @@ export class MissionService {
       );
 
     return created;
+  }
+
+  /** delete a mission */
+  deleteMission(id: number): Observable<Mission> {
+    const url = `${this.missionsApiUrl}/${id}`;
+    const deleteOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+
+    // TODO: why still need deleteoptions?
+    return this.http.delete<Mission>(url, deleteOptions).pipe(
+      tap((_) => this.log(`deleted mission id=${id}`)),
+      catchError(this.handleError<Mission>('deleteMission'))
+    );
   }
 
   /** message service method */
