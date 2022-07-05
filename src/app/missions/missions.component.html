@@ -13,7 +13,11 @@
     <input id="new-mission-unit" #missionUnit />
 
     <label for="new-mission-is-fixed">定量</label>
-    <input id="new-mission-is-fixed" #missionIsFixed />
+    <input
+      type="checkbox"
+      [checked]="newMissionIsFixed"
+      (change)="onChange()"
+    />
 
     <label for="new-mission-increment">增量</label>
     <input id="new-mission-increment" #missionIncrement />
@@ -26,13 +30,11 @@
           missionName.value,
           missionAmount.value,
           missionUnit.value,
-          missionIsFixed.value,
           missionIncrement.value
         );
         missionName.value = '';
         missionAmount.value = '';
         missionUnit.value = '';
-        missionIsFixed.value = '';
         missionIncrement.value = ''
       "
     >
