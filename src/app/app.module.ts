@@ -8,6 +8,7 @@ import { MissionDetailComponent } from './mission-detail/mission-detail.componen
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MissionSearchComponent } from './mission-search/mission-search.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MissionDetailComponent,
     MessagesComponent,
     DashboardComponent,
+    MissionSearchComponent,
   ],
   imports: [HttpClientModule, BrowserModule, FormsModule, AppRoutingModule],
   providers: [],

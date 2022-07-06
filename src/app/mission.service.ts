@@ -197,6 +197,34 @@ export class MissionService {
     );
   }
 
+  /** search missions */
+  searchMissions(term: string): Observable<Mission[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+
+    return this.http
+      .get<GetMissionsResponse>(`${this.missionsApiUrl}/?missionName=${term}`)
+      .pipe(
+        map((res: GetMissionsResponse) => {
+          const missionsFromDb = res.data;
+
+          const missions = missionsFromDb.map(this.convertRowToMission);
+
+          return missions;
+        })
+      )
+
+      .pipe(
+        tap((missions) =>
+          missions.length
+            ? this.log(`found missions matching "${term}"`)
+            : this.log(`no mission matching "${term}"`)
+        ),
+        catchError(this.handleError<Mission[]>('searchMissions', []))
+      );
+  }
+
   /** message service method */
   private log(message: string) {
     this.messageService.add(`mission service : ${message}`);
