@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = '三十七倍：原則';
+  title = 'Principle: 1.01 Daily Missions';
 }
