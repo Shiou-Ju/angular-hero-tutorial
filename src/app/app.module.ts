@@ -9,6 +9,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MissionSearchComponent } from './mission-search/mission-search.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { MissionSearchComponent } from './mission-search/mission-search.componen
     DashboardComponent,
     MissionSearchComponent,
   ],
-  imports: [HttpClientModule, BrowserModule, FormsModule, AppRoutingModule],
+  imports: [HttpClientModule, BrowserModule, FormsModule, AppRoutingModule, NoopAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
