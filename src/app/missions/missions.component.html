@@ -1,61 +1,68 @@
 <body *ngIf="show">
-  <h2>任務清單</h2>
+  <mat-grid-list cols="4" rowHeight="2:1">
+    <mat-grid-tile rowspan="2">
+      <div class="new-mission">
+        <h2>新增任務</h2>
+        <label for="new-mission-name">名稱</label>
+        <input id="new-mission-name" #missionName />
 
-  <div class="new-mission">
-    <p>新增任務</p>
-    <label for="new-mission-name">名稱</label>
-    <input id="new-mission-name" #missionName />
+        <label for="new-mission-amount">數量</label>
+        <input id="new-mission-amount" #missionAmount />
 
-    <label for="new-mission-amount">數量</label>
-    <input id="new-mission-amount" #missionAmount />
+        <label for="new-mission-unit">單位</label>
+        <input id="new-mission-unit" #missionUnit />
 
-    <label for="new-mission-unit">單位</label>
-    <input id="new-mission-unit" #missionUnit />
+        <label for="new-mission-is-fixed">定量</label>
+        <input
+          type="checkbox"
+          [checked]="newMissionIsFixed"
+          (change)="onChange()"
+        />
 
-    <label for="new-mission-is-fixed">定量</label>
-    <input
-      type="checkbox"
-      [checked]="newMissionIsFixed"
-      (change)="onChange()"
-    />
+        <label for="new-mission-increment">增量</label>
+        <input id="new-mission-increment" #missionIncrement />
 
-    <label for="new-mission-increment">增量</label>
-    <input id="new-mission-increment" #missionIncrement />
+        <button
+          type="button"
+          class="add-button"
+          (click)="
+            addMission(
+              missionName.value,
+              missionAmount.value,
+              missionUnit.value,
+              missionIncrement.value
+            );
+            missionName.value = '';
+            missionAmount.value = '';
+            missionUnit.value = '';
+            missionIncrement.value = ''
+          "
+        >
+          新增
+        </button>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="3" colspan="3">
+      <div class="mission-list">
+        <h2>任務清單</h2>
+        <ul *ngIf="show" class="missions">
+          <li *ngFor="let mission of missions">
+            <a routerLink="/detail/{{ mission.id }}">
+              <span class="badge"> {{ mission.id }} </span>
+              <span class="name"> {{ mission.name }} </span>
+            </a>
+            <button
+              type="button"
+              class="delete"
+              title="delete mission"
+              (click)="delete(mission)"
+            >
+              X
+            </button>
+          </li>
+        </ul>
+      </div>
+    </mat-grid-tile>
 
-    <button
-      type="button"
-      class="add-button"
-      (click)="
-        addMission(
-          missionName.value,
-          missionAmount.value,
-          missionUnit.value,
-          missionIncrement.value
-        );
-        missionName.value = '';
-        missionAmount.value = '';
-        missionUnit.value = '';
-        missionIncrement.value = ''
-      "
-    >
-      新增
-    </button>
-  </div>
-
-  <ul *ngIf="show" class="missions">
-    <li *ngFor="let mission of missions">
-      <a routerLink="/detail/{{ mission.id }}">
-        <span class="badge"> {{ mission.id }} </span>
-        <span class="name"> {{ mission.name }} </span>
-      </a>
-      <button
-        type="button"
-        class="delete"
-        title="delete mission"
-        (click)="delete(mission)"
-      >
-        X
-      </button>
-    </li>
-  </ul>
+  </mat-grid-list>
 </body>

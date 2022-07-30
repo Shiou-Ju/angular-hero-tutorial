@@ -1,3 +1,21 @@
+h2 {
+  text-align: center;
+}
+
+mat-grid-list {
+  margin-top: 2rem;
+}
+
+mat-grid-tile {
+  padding: 100px;
+}
+
+.mission-list {
+  height: 600px;
+  overflow: auto;
+  padding-right: 1rem;
+}
+
 .missions {
   margin: 0 0 2em 0;
   list-style-type: none;
