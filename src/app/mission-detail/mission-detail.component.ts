@@ -58,4 +58,12 @@ export class MissionDetailComponent implements OnInit {
         .subscribe(() => this.goBack());
     }
   }
+
+  delete(): void {
+    // TODO: make a modal to improve this
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (confirm(`確定要移除任務 ${this.selectedMission?.name} 嗎？`)) {
+      this.missionService.deleteMission(id).subscribe(() => this.goBack());
+    }
+  }
 }

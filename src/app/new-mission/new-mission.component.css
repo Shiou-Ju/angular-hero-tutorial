@@ -1,22 +1,22 @@
-.container { 
-    /* position */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.container {
+  /* position */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .new-mission {
   /* content */
-   display: flex;
+  display: flex;
   flex-direction: column;
 }
 
-h2 { 
+h2 {
   text-align: center;
 }
 
-.add-button { 
+.add-button {
   justify-content: center;
   align-items: center;
 }
