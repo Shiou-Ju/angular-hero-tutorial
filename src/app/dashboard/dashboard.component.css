@@ -4,6 +4,10 @@ h2 {
   text-align: center;
 }
 
+.dash-container {
+  margin-top: 50px;
+}
+
 .missions-menu {
   padding: 0;
   margin: auto;

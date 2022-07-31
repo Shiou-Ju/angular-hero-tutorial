@@ -1,9 +1,13 @@
-<h2>今日任務</h2>
 <!-- TODO: this should be a checklist, while everything completed, add streak `1` and some animation here. -->
-<div class="missions-menu">
-  <a *ngFor="let mission of missions" routerLink="/detail/{{ mission.id }}">
-    {{ mission.name }}
-  </a>
-</div>
-
+<h2>尋找任務</h2>
 <app-mission-search></app-mission-search>
+
+<div class="dash-container">
+  <h2>今日任務</h2>
+
+  <div class="missions-menu">
+    <a *ngFor="let mission of missions" routerLink="/detail/{{ mission.id }}">
+      {{ mission.name }}
+    </a>
+  </div>
+</div>
