@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="new-mission">
+    <h2>新增任務</h2>
+
+    <mat-form-field appearance="fill">
+      <mat-label for="new-mission-name">名稱</mat-label>
+      <input id="new-mission-name" #missionName matInput />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label for="new-mission-amount">數量</mat-label>
+      <input id="new-mission-amount" #missionAmount matInput />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label for="new-mission-unit">單位</mat-label>
+      <input id="new-mission-unit" #missionUnit matInput />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label for="new-mission-increment">增量</mat-label>
+      <input id="new-mission-increment" #missionIncrement matInput />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label for="new-mission-is-fixed">是否定量</mat-label>
+      <mat-select #missionIsFixed>
+        <mat-option value="true">是</mat-option>
+        <mat-option value="false">否</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      class="add-button"
+      (click)="
+        addMission(
+          missionName.value,
+          missionAmount.value,
+          missionUnit.value,
+          missionIncrement.value,
+          missionIsFixed.value
+        );
+        missionName.value = '';
+        missionAmount.value = '';
+        missionUnit.value = '';
+        missionIncrement.value = '';
+        missionIsFixed.value = ''
+      "
+    >
+      新增
+    </button>
+  </div>
+</div>

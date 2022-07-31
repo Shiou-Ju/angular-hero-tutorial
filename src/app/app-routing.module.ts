@@ -3,12 +3,14 @@ import { Route, RouterModule, Routes } from '@angular/router';
 import { MissionsComponent } from './missions/missions.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MissionDetailComponent } from './mission-detail/mission-detail.component';
+import { NewMissionComponent } from './new-mission/new-mission.component';
 
 // route paths
 const paths = {
   missionDetail: 'detail/:id',
   missions: 'missions',
   dashBoard: 'dashboard',
+  newMission: 'new',
 };
 
 // default route
@@ -30,12 +32,17 @@ const dashBoardRoute: Route = {
   path: paths.dashBoard,
   component: DashboardComponent,
 };
+const newMissionRoute: Route = {
+  path: paths.newMission,
+  component: NewMissionComponent,
+};
 
 const routes: Routes = [
   defaultRoute,
   missionDetailRoute,
   missionsRoute,
   dashBoardRoute,
+  newMissionRoute,
 ];
 
 @NgModule({

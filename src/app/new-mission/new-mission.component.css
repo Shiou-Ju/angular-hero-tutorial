@@ -1,0 +1,22 @@
+.container { 
+    /* position */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.new-mission {
+  /* content */
+   display: flex;
+  flex-direction: column;
+}
+
+h2 { 
+  text-align: center;
+}
+
+.add-button { 
+  justify-content: center;
+  align-items: center;
+}
