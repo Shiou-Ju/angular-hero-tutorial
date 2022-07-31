@@ -1,8 +1,10 @@
 <mat-toolbar>
   <h1>{{ title }}</h1>
+  <!-- TODO: why does nav bar different padding when different routes -->
+  <!-- TODO: because we set grid template -->
   <nav>
     <button mat-stroked-button routerLink="/dashboard">今日任務</button>
-    <button mat-stroked-button color="primary" routerLink="/missions">
+    <button mat-stroked-button routerLink="/missions">
       列表
     </button>
     <!-- TODO: -->
