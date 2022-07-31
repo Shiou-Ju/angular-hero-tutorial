@@ -3,6 +3,8 @@
     <mat-grid-tile rowspan="2">
       <div class="new-mission">
         <h2>新增任務</h2>
+
+        <!-- TODO: why mat input does not work -->
         <label for="new-mission-name">名稱</label>
         <input id="new-mission-name" #missionName />
 
@@ -12,15 +14,16 @@
         <label for="new-mission-unit">單位</label>
         <input id="new-mission-unit" #missionUnit />
 
-        <label for="new-mission-is-fixed">定量</label>
-        <input
-          type="checkbox"
-          [checked]="newMissionIsFixed"
-          (change)="onChange()"
-        />
-
         <label for="new-mission-increment">增量</label>
         <input id="new-mission-increment" #missionIncrement />
+
+        <mat-form-field appearance="fill">
+          <mat-label for="new-mission-is-fixed">是否定量</mat-label>
+          <mat-select #missionIsFixed>
+            <mat-option value="true">是</mat-option>
+            <mat-option value="false">否</mat-option>
+          </mat-select>
+        </mat-form-field>
 
         <button
           type="button"
@@ -30,7 +33,8 @@
               missionName.value,
               missionAmount.value,
               missionUnit.value,
-              missionIncrement.value
+              missionIncrement.value,
+              missionIsFixed.value
             );
             missionName.value = '';
             missionAmount.value = '';

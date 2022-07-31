@@ -41,8 +41,6 @@ button:disabled {
 }
 
 /* everywhere else */
-* {
-}
 
 mat-toolbar {
   display: flex;

@@ -82,6 +82,14 @@ mat-grid-tile {
   margin-top: 0.5em;
 }
 
+.new-mission label {
+  margin-top: 1rem;
+}
+
+.new-mission mat-form-field {
+  margin-top: 1rem;
+}
+
 /* delete btn */
 button.delete {
   position: absolute;

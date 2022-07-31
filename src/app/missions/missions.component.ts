@@ -12,7 +12,6 @@ import { MissionService, NewMissionFormData } from 'src/app/mission.service';
 })
 export class MissionsComponent implements OnInit {
   show = false;
-  newMissionIsFixed = false;
 
   constructor(
     private missionService: MissionService,
@@ -39,7 +38,8 @@ export class MissionsComponent implements OnInit {
     name: string,
     amount: string,
     unit: string,
-    increment: string
+    increment: string,
+    missionIsFixed: string
   ): void {
     name = name.trim();
     amount = amount.trim();
@@ -55,7 +55,7 @@ export class MissionsComponent implements OnInit {
       name,
       amount,
       unit,
-      isFixed: this.newMissionIsFixed ? 'true' : 'false',
+      isFixed: missionIsFixed,
       increment,
     };
 
@@ -71,9 +71,6 @@ export class MissionsComponent implements OnInit {
       .replace('}', '');
 
     this.messageService.add(`missions components: 建立新任務 ${message}`);
-
-    // recover checkbox
-    this.newMissionIsFixed = false;
   }
 
   delete(targetMission: Mission): void {
@@ -84,9 +81,5 @@ export class MissionsComponent implements OnInit {
       );
       this.missionService.deleteMission(targetMission.id).subscribe();
     }
-  }
-
-  onChange() {
-    this.newMissionIsFixed = true;
   }
 }
